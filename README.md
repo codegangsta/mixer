@@ -5,6 +5,8 @@ Mixer attempts to solve some of the problems that
 [Martini](https://github.com/go-martini/martini) tried to solve, but with a
 smaller, more idiomatic scope.
 
+If you liked the idea of dependency injection in Martini, but you think it contained too much magic, then Mixer is a great fit.
+
 
 ## Features
 
@@ -34,6 +36,7 @@ package main
 
 import (
     "fmt"
+    "net/http"
 
     "github.com/codegangsta/mixer"
 )
@@ -65,6 +68,7 @@ package main
 import (
     "fmt"
     "log"
+    "net/http"
     "os"
 
     "github.com/codegangsta/mixer"
@@ -166,28 +170,29 @@ I'm really enjoying [https://github.com/go-chi/chi](https://github.com/go-chi/ch
 package main
 
 import (
-	"net/http"
+    "fmt"
+    "net/http"
 
-	"github.com/go-chi/chi/v5"
+    "github.com/go-chi/chi/v5"
     "github.com/codegangsta/mixer"
 )
 
 type Context {
     mixer.Context
-    
+
     // Add your dependencies here
 }
 
 func main() {
-	r := chi.NewRouter()
+    r := chi.NewRouter()
     m := mixer.New(func(c mixer.Context) *Context {
         return &Context{c}
     })
-    
-	r.Get("/", mixer.Handler(func(c *Context) {
+
+    r.Get("/", mixer.Handler(func(c *Context) {
         fmt.Fprint(c.ResponseWriter(), "Hello world")
-	}))
-	http.ListenAndServe(":3000", r)
+    }))
+    http.ListenAndServe(":3000", r)
 }
 
 ```
