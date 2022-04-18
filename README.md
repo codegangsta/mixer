@@ -116,7 +116,7 @@ func AppContext struct {
 }
 ```
 
-We can add that user in a before func, maybe it comes from a cookie:
+We can add that user in a `Before` hook, maybe it comes from a cookie:
 
 ```go
 m.Before(func(c *AppContext) {
@@ -130,6 +130,15 @@ m.Before(func(c *AppContext) {
     c.User = lookupUser(cookie.Value)
 })
 ```
+
+Same can be accomplished with an `After` hook:
+
+```go
+m.After(func(c *AppContext) {
+    c.Logger.Println("Request Finished")
+})
+```
+
 
 ## FAQ
 
