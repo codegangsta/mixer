@@ -9,7 +9,7 @@ smaller, more idiomatic scope.
 ## Features
 
 * Type safe
-* Brutally simple to uses
+* Brutally simple to use
 * Non intrusive design
 * Zero external dependencies
 * Compatible with most HTTP routers out there, choose your favorite!
