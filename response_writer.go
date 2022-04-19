@@ -22,7 +22,7 @@ type ResponseWriter interface {
 	Size() int
 }
 
-// NewResponseWriter creates a ResponseWriter that wraps an http.ResponseWriter
+// NewResponseWriter creates a ResponseWriter that wraps a http.ResponseWriter
 func NewResponseWriter(rw http.ResponseWriter) ResponseWriter {
 	nrw := &responseWriter{
 		ResponseWriter: rw,
