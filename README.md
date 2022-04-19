@@ -1,5 +1,8 @@
 # Mixer: Classy HTTP Handlers in Go
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/codegangsta/mixer.svg)](https://pkg.go.dev/github.com/codegangsta/mixer)
+[![Go Report Card](https://goreportcard.com/badge/github.com/codegangsta/mixer)](https://goreportcard.com/report/github.com/codegangsta/mixer)
+
 Mixer is a small but powerful package for writing modular HTTP handlers in Go.
 Mixer attempts to solve some of the problems that
 [Martini](https://github.com/go-martini/martini) tried to solve, but with a
