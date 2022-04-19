@@ -8,37 +8,37 @@
 //
 // For a full guide visit http://github.com/codegangsta/mixer
 //
-// package main
+//    package main
 //
-// import (
-//     "fmt"
-//     "log"
-//     "os"
+//    import (
+//        "fmt"
+//        "log"
+//        "os"
 //
-//     "github.com/codegangsta/mixer"
-// )
+//        "github.com/codegangsta/mixer"
+//    )
 //
-// func AppContext struct {
-//     mixer.Context
+//    func AppContext struct {
+//        mixer.Context
 //
-//     Logger *log.Logger
-// }
+//        Logger *log.Logger
+//    }
 //
-// func main() {
-//     // We've changed mixer.Classic to mixer.New, and passed
-//     // a context function into it, so that the compiler knows
-//     // what our context is, and what data to start it with
-//     m := mixer.New(func(c mixer.Context) *AppContext {
-//         return &AppContext{
-//             Context: c,
-//             Logger: log.New(os.Stdout, "[mixer]", 0)
-//         }
-//     })
+//    func main() {
+//        // We've changed mixer.Classic to mixer.New, and passed
+//        // a context function into it, so that the compiler knows
+//        // what our context is, and what data to start it with
+//        m := mixer.New(func(c mixer.Context) *AppContext {
+//            return &AppContext{
+//                Context: c,
+//                Logger: log.New(os.Stdout, "[mixer]", 0)
+//            }
+//        })
 //
-//     hello := func(c *AppContext) {
-//         fmt.Fprint(c.ResponseWriter(), "Hello world")
-//     }
+//        hello := func(c *AppContext) {
+//            fmt.Fprint(c.ResponseWriter(), "Hello world")
+//        }
 //
-//     http.ListenAndServe(":3000", m.Handler(hello))
-// }
+//        http.ListenAndServe(":3000", m.Handler(hello))
+//    }
 package mixer
