@@ -25,7 +25,7 @@ func New[T any](fn ContextFn[T]) *Mixer[T] {
 	}
 }
 
-// Classsic returns an instance of a mixer.Mixer that is bound to type mixer.Context
+// Classic returns an instance of a mixer.Mixer that is bound to type mixer.Context
 func Classic() *Mixer[Context] {
 	return New(func(c Context) Context {
 		return c
