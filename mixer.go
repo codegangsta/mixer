@@ -7,11 +7,11 @@ import (
 // Handler is a generic representation of a http Handler in Mixer.
 type Handler[T any] func(T)
 
-// ContextFN is a generic function that is passed a mixer.Context and expects a
+// ContextFn is a generic function that is passed a mixer.Context and expects a
 // T in return. Used for transforming mixer.Contexts into a custom type.
 type ContextFn[T any] func(Context) T
 
-// A Mixer repressents a container that can convert mix.Handlers into http.HandlerFuncs
+// A Mixer represents a container that can convert mix.Handlers into http.HandlerFuncs
 type Mixer[T any] struct {
 	fn          ContextFn[T]
 	beforeHooks []Handler[T]
@@ -65,7 +65,7 @@ func (m *Mixer[T]) Handler(handler Handler[T]) http.HandlerFunc {
 	})
 }
 
-// Adds a mixer.Handler to be executed before any primary handlers are
+// Before adds a mixer.Handler to be executed before any primary handlers are
 // executed. If a before func writes to the http.ResponseWriter on the context,
 // execution is skipped for the rest of the handlers, and resumed with the
 // first After handler.
@@ -73,7 +73,7 @@ func (m *Mixer[T]) Before(h Handler[T]) {
 	m.beforeHooks = append(m.beforeHooks, h)
 }
 
-// Adds a mixer.Handler to be executed after any primary handlers are
+// After adds a mixer.Handler to be executed after any primary handlers are
 // executed.
 func (m *Mixer[T]) After(h Handler[T]) {
 	m.afterHooks = append(m.afterHooks, h)
