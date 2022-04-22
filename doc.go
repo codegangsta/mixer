@@ -18,7 +18,7 @@
 //        "github.com/codegangsta/mixer"
 //    )
 //
-//    func AppContext struct {
+//    type AppContext struct {
 //        mixer.Context
 //
 //        Logger *log.Logger

@@ -77,7 +77,7 @@ import (
     "github.com/codegangsta/mixer"
 )
 
-func AppContext struct {
+type AppContext struct {
     mixer.Context
     
     Logger *log.Logger
@@ -90,7 +90,7 @@ func main() {
     m := mixer.New(func(c mixer.Context) *AppContext {
         return &AppContext{
             Context: c,
-            Logger: log.New(os.Stdout, "[mixer]", 0)
+            Logger: log.New(os.Stdout, "[mixer]", 0),
         }
     })
     
@@ -115,7 +115,7 @@ logic or map some dependencies outside of the context func.
 If we add a `User` type to our `AppContext`:
 
 ```go
-func AppContext struct {
+type AppContext struct {
     mixer.Context
     
     Logger *log.Logger
@@ -180,7 +180,7 @@ import (
     "github.com/codegangsta/mixer"
 )
 
-type Context {
+type Context struct {
     mixer.Context
 
     // Add your dependencies here
@@ -192,7 +192,7 @@ func main() {
         return &Context{c}
     })
 
-    r.Get("/", mixer.Handler(func(c *Context) {
+    r.Get("/", m.Handler(func(c *Context) {
         fmt.Fprint(c.ResponseWriter(), "Hello world")
     }))
     http.ListenAndServe(":3000", r)
@@ -203,7 +203,7 @@ func main() {
 
 ### How does this work without reflection?
 
-Mixer uses a very straightforward generics implementation to accomplish it's
+Mixer uses a very straightforward generics implementation to accomplish its
 custom context feature. (Seriously, read the code, it's so freaking simple)
 
 
