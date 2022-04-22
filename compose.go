@@ -1,5 +1,6 @@
 package mixer
 
+// Clone performs a deep copy.
 func (m *Mixer[T]) Clone() *Mixer[T] {
 	beforeHooks := make([]Handler[T], len(m.beforeHooks))
 	afterHooks := make([]Handler[T], len(m.afterHooks))
@@ -12,14 +13,11 @@ func (m *Mixer[T]) Clone() *Mixer[T] {
 	}
 }
 
-func (m *Mixer[T]) WithBefore(h Handler[T]) *Mixer[T] {
+// With clones the Mixer[T] and then calls setup on the fresh copy.
+func (m *Mixer[T]) With(setup func(f *Mixer[T])) *Mixer[T] {
 	n := m.Clone()
-	n.Before(h)
-	return n
-}
-
-func (m *Mixer[T]) WithAfter(h Handler[T]) *Mixer[T] {
-	n := m.Clone()
-	n.After(h)
+	if setup != nil {
+		setup(n)
+	}
 	return n
 }
