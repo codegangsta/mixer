@@ -131,6 +131,30 @@ func TestEarlyReturn(t *testing.T) {
 	expect(t, result, "foobarbaz")
 }
 
+func TestMultiHandler(t *testing.T) {
+	var result string
+
+	m := mixer.Classic()
+	m.Before(func(c mixer.Context) {
+		result += "foo"
+	})
+	m.Before(func(c mixer.Context) {
+		result += "bar"
+	})
+	m.After(func(c mixer.Context) {
+		result += "baz"
+	})
+
+	h := func(c mixer.Context) {
+		result += "bat"
+	}
+
+	response := httptest.NewRecorder()
+	m.Handler(h, h, h).ServeHTTP(response, (*http.Request)(nil))
+
+	expect(t, result, "foobarbatbatbatbaz")
+}
+
 /* Test Helpers */
 func expect(t *testing.T, a any, b any) {
 	if a != b {

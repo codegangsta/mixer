@@ -36,7 +36,7 @@ func Classic() *Mixer[Context] {
 // functionality such as before/after funcs and context injection in a simple,
 // portable package. You can use this function to interface with existing
 // packages that utilize the http.Handler interface
-func (m *Mixer[T]) Handler(handler Handler[T]) http.HandlerFunc {
+func (m *Mixer[T]) Handler(handlers ...Handler[T]) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		resp := NewResponseWriter(w)
 
@@ -53,9 +53,11 @@ func (m *Mixer[T]) Handler(handler Handler[T]) http.HandlerFunc {
 			before(context)
 		}
 
-		// Call Handler
-		if !resp.Written() {
-			handler(context)
+		// Call Handlers
+		for _, h := range handlers {
+			if !resp.Written() {
+				h(context)
+			}
 		}
 
 		// After Hooks
